@@ -1,0 +1,106 @@
+class Ticket{
+    private String ticketNo;
+    private String trainNo;
+    private String travelDate;
+    private String source;
+    private String destination;
+    private Passenger[] passengers;
+    private float res;
+    public Ticket(String a1,String a2,String a3,String a4,String a5){
+        ticketNo=a1;
+        trainNo=a2;
+        travelDate=a3;
+        source=a4;
+        destination=a5;
+        System.out.println(ticketNo+" "+trainNo+" "+travelDate);
+    }
+    public String getTicketNo(){
+        return ticketNo;
+    }
+    public String getTrainNo(){
+        return trainNo;
+    }
+    public String getTravelDate(){
+        return travelDate;
+    }
+    public String getSource(){
+        return source;
+    }
+    public String getDestination(){
+        return destination;
+    }
+    public void setPassengers(Passenger[] p){
+        passengers=p;
+    }
+    public void getTrainDetails(){
+        System.out.println("Train Number   :"+trainNo);
+        System.out.println("Ticket Number  :"+ticketNo);
+        System.out.println("Source         :"+source);
+        System.out.println("Destination    :"+destination);
+        System.out.println("Date of travel :"+travelDate);
+        System.out.println("--------End Of Train Details----------");
+    }
+    public void getPassengerDetails(){
+        System.out.println("----------Passengers Details---------");
+        for(int i=0;i<passengers.length;i++){
+            System.out.println("Passenger Name  :"+passengers[i].getName());
+            System.out.println("Passenger Age   :"+passengers[i].getAge());
+            System.out.println("Passenger Gender:"+passengers[i].getGender());
+            System.out.println('\n');
+        }
+        System.out.println("--------End Of Passengers Details----------");
+    }
+    public float calculateFinalFare(float bf){
+        System.out.println("----------Final Fare---------");
+        for(int i=0;i<passengers.length;i++){
+            if(passengers[i].getAge()<=5){
+                res+=0;
+            }
+            else if(passengers[i].getAge()>5 && passengers[i].getAge()<=12){
+                res+=bf*0.5f;
+            }
+            else if((passengers[i].getAge()>65 && passengers[i].getGender()=='M') || (passengers[i].getAge()>58 && passengers[i].getGender()=='F')){
+                res+=bf*0.75f;
+            }
+            else{
+                res+=bf;
+            }
+        }
+        return res;
+    }
+}
+class Passenger{
+    private String name;
+    private int age;
+    private char gender;
+    public Passenger(String a1,int a2,char a3){
+        name=a1;
+        age=a2;
+        gender=a3;
+    }
+    public String getName(){
+        return name;
+    }
+    public int getAge(){
+        return age;
+    }
+    public char getGender(){
+        return gender;
+    }
+}
+class TestClass{
+    public static void main(String args[]){
+        Ticket a1=new Ticket("101A","A21","10-12-2002","jangareddygudem","rajahmundery");
+        Passenger[] p=new Passenger[3];
+        p[0]=new Passenger("madhu",21,'M');
+        p[1]=new Passenger("kumari",21,'F');
+        p[2]=new Passenger("jaanu",21,'F');
+        a1.setPassengers(p);
+	System.out.println("----------Train Details---------");
+        a1.getTrainDetails();
+        a1.getPassengerDetails();
+        System.out.println("            "+a1.calculateFinalFare(1000.0f));
+	 System.out.println("----------End for Final Fare---------");
+        
+    }
+}
